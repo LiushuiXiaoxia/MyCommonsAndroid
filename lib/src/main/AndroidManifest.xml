@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.mycommons.simplebase.android" >
+
+    <application>
+            <activity android:name=".base.host.BaseHostActivity" />
+    </application>
+</manifest>
+

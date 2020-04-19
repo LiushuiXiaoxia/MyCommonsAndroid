@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        versionName SDK_VERSION
+        versionCode SDK_VERSION.replace(".", "").toInteger()
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation rootProject.ext.dependencies.appcompatV7
+    implementation rootProject.ext.dependencies.recyclerview
+    implementation 'com.android.support:multidex:1.0.3'
+    api 'com.jakewharton.timber:timber:4.7.1'
+    api 'org.greenrobot:eventbus:3.2.0'
+    api "android.arch.lifecycle:extensions:1.1.1"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

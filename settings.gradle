@@ -1,0 +1,3 @@
+rootProject.name='SimpleBase'
+include ':app'
+include ':lib'
