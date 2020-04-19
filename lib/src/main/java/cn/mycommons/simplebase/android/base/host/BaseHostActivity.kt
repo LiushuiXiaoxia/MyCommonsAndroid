@@ -37,7 +37,7 @@ class BaseHostActivity : BaseActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_host)
+        setContentView(R.layout.sb_activity_host)
 
         if (param?.title?.isNotBlank() == true) {
             title = param?.title
@@ -46,9 +46,7 @@ class BaseHostActivity : BaseActivity() {
         val args = Bundle().apply { putSerializable(EXTRA_PARAM, param) }
         val fragment = clazz.newInstance().apply { arguments = args }
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.flRoot, fragment)
-            .commit()
+        supportFragmentManager.beginTransaction().add(R.id.flRoot, fragment).commit()
     }
 
     override fun hasBackButton(): Boolean = param?.gotoBack ?: super.hasBackButton()
