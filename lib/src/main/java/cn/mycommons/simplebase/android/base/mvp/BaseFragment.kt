@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import cn.mycommons.simplebase.android.base.BaseFragment
 import cn.mycommons.simplebase.android.util.logDebug
 import cn.mycommons.simplebase.android.util.logError
-import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-abstract class BaseUIFragment<P : BaseUIPresenter<V>, V : IBaseMvpView> : BaseFragment() {
+abstract class BaseFragment<P : BasePresenter<V>, V : IBaseMvpView> : BaseFragment() {
 
     var presenter: P? = null
 
@@ -64,26 +63,3 @@ abstract class BaseUIFragment<P : BaseUIPresenter<V>, V : IBaseMvpView> : BaseFr
         presenter?.onDestroy()
     }
 }
-
-abstract class BaseUIPresenter<V : IBaseMvpView> {
-
-    var mvpView: V? = null
-
-    fun onCreate() {
-        logDebug("onCreate")
-
-        try {
-            EventBus.getDefault().register(this)
-        } catch (e: Exception) {
-        }
-    }
-
-    fun onDestroy() {
-        logDebug("onDestroy")
-
-        EventBus.getDefault().unregister(this)
-        mvpView = null
-    }
-}
-
-interface IBaseMvpView
