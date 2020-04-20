@@ -28,10 +28,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation rootProject.ext.dependencies.appcompatV7
-    implementation rootProject.ext.dependencies.recyclerview
-    implementation "com.android.support:design:${rootProject.ext.android.supportVersion}"
-    // implementation 'com.android.support:multidex:1.0.3'
+
+    api rootProject.ext.dependencies.appcompatV7
+    api rootProject.ext.dependencies.recyclerview
+    api "com.android.support:design:${rootProject.ext.android.supportVersion}"
     api 'com.jakewharton.timber:timber:4.7.1'
     api 'org.greenrobot:eventbus:3.2.0'
     api "android.arch.lifecycle:extensions:1.1.1"
