@@ -2,20 +2,16 @@ package cn.mycommons.simpleandroidbase.sab.app
 
 import android.content.ContentProvider
 import android.content.ContentValues
-import android.content.Context
-import android.content.pm.ProviderInfo
 import android.database.Cursor
 import android.net.Uri
+import cn.mycommons.simpleandroidbase.sab.SabKit
 
-class SabContentProvider : ContentProvider() {
+class SabInitProvider : ContentProvider() {
 
-    override fun attachInfo(context: Context?, info: ProviderInfo?) {
-        super.attachInfo(context, info)
-
-        App.init(context!!)
+    override fun onCreate(): Boolean {
+        SabKit.init(context!!)
+        return true
     }
-
-    override fun onCreate(): Boolean = true
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int = 0
 

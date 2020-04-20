@@ -9,4 +9,9 @@ import android.app.Application
 
 class AppContext : Application() {
 
+    override fun onCreate() {
+        super.onCreate()
+
+        // SabKit.init(this, SabConfig(BuildConfig.DEBUG))
+    }
 }

@@ -5,42 +5,49 @@ import android.os.Handler
 import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import cn.mycommons.simpleandroidbase.sab.base.view.ProgressLoadView
-import org.greenrobot.eventbus.EventBus
+import cn.mycommons.simpleandroidbase.sab.SabKit
+import cn.mycommons.simpleandroidbase.sab.util.showToast
 
 abstract class BaseActivity : AppCompatActivity(), IUiCreator, ILoadView {
 
     val uiHandler = Handler(Looper.getMainLooper())
 
-    var loadView: ILoadView? = null
+    private lateinit var loadView: ILoadView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         onCreateBefore()
+        doCreate()
+        onCreateAfter(savedInstanceState)
+    }
 
+    private fun doCreate() {
+        initActionBar()
+
+        try {
+            SabKit.factory.eventBus().register(this)
+        } catch (e: Exception) {
+        }
+        loadView = createLoadView()
+    }
+
+    open fun hasBackButton(): Boolean = false
+
+    open fun initActionBar() {
         if (hasBackButton()) {
             supportActionBar?.let {
                 it.setDisplayHomeAsUpEnabled(true)
                 it.setDisplayShowHomeEnabled(true)
             }
         }
-
-        try {
-            EventBus.getDefault().register(this)
-        } catch (e: Exception) {
-        }
-
-        loadView = createLoadView()
-        onCreateAfter(savedInstanceState)
     }
-
-    open fun hasBackButton(): Boolean = false
 
     override fun onCreateBefore() {
     }
 
     override fun onCreateAfter(savedInstanceState: Bundle?) {
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -53,28 +60,26 @@ abstract class BaseActivity : AppCompatActivity(), IUiCreator, ILoadView {
 
     override fun onDestroy() {
         super.onDestroy()
-        EventBus.getDefault().unregister(this)
+        SabKit.factory.eventBus().unregister(this)
     }
 
     fun getActivity() = this
 
     fun getContext() = this
 
-    /**
-     * 自定义加载视图
-     */
-    open fun createLoadView(): ILoadView {
-        return ProgressLoadView(getContext())
-    }
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //// ILoadView
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * 自定义加载视图
+     */
+    open fun createLoadView(): ILoadView = SabKit.factory.loadView(this, this)
+
     override fun showLoadView() {
         uiHandler.post {
             if (!isDestroyActivity()) {
-                loadView?.showLoadView()
+                loadView.showLoadView()
             }
         }
     }
@@ -82,13 +87,13 @@ abstract class BaseActivity : AppCompatActivity(), IUiCreator, ILoadView {
     override fun dismissLoadView() {
         uiHandler.post {
             if (!isDestroyActivity()) {
-                loadView?.dismissLoadView()
+                loadView.dismissLoadView()
             }
         }
     }
 
     override fun showMessage(message: String) {
-        showMessage(message)
+        showToast(message)
     }
 
     fun isDestroyActivity(): Boolean {

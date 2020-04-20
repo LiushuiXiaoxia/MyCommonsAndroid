@@ -28,7 +28,7 @@ class BaseHostActivity : BaseActivity() {
 
     private var param: BaseHostParam? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateAfter(savedInstanceState: Bundle?) {
         val clazz = intent.getSerializableExtra(EXTRA_FRAGMENT) as Class<out BaseHostFragment<*>>?
         param = intent.getSerializableExtra(EXTRA_PARAM) as BaseHostParam?
         if (clazz == null) {
@@ -36,12 +36,7 @@ class BaseHostActivity : BaseActivity() {
             return
         }
 
-        super.onCreate(savedInstanceState)
         setContentView(R.layout.sab_activity_host)
-
-        if (param?.title?.isNotBlank() == true) {
-            title = param?.title
-        }
 
         val args = Bundle().apply { putSerializable(EXTRA_PARAM, param) }
         val fragment = clazz.newInstance().apply { arguments = args }

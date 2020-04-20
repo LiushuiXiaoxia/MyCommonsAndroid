@@ -4,10 +4,10 @@
 
     <application>
         <provider
-            android:name=".app.SabContentProvider"
-            android:authorities="SabContentProvider"
+            android:name=".app.SabInitProvider"
+            android:authorities="${applicationId}.SabInitProvider"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
 
         <activity android:name=".base.host.BaseHostActivity" />
     </application>

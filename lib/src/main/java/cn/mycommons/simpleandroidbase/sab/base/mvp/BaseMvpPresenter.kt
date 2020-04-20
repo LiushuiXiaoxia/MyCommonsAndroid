@@ -1,4 +1,4 @@
-package cn.mycommons.simpleandroidbase.sab.base.mvp.mvp2
+package cn.mycommons.simpleandroidbase.sab.base.mvp
 
 import android.os.Handler
 import android.os.Looper
