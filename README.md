@@ -22,5 +22,5 @@ Just simple code.
 ```
 
 ```groovy
-implementation 'cn.mycommons:simple-android-base:0.0.1'
+implementation 'cn.mycommons:simple-android-base:${version}'
 ```
