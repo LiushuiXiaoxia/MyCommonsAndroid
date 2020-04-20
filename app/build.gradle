@@ -7,7 +7,7 @@ android {
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "cn.mycommons.simplebase.demo"
+        applicationId "cn.mycommons.simpleandroidbase.demo"
 
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         minSdkVersion rootProject.ext.android.minSdkVersion

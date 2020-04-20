@@ -1,8 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.mycommons.simplebase.android" >
+    package="cn.mycommons.simpleandroidbase.sab">
 
     <application>
-            <activity android:name=".base.host.BaseHostActivity" />
-    </application>
-</manifest>
+        <provider
+            android:name=".app.SabContentProvider"
+            android:authorities="SabContentProvider"
+            android:enabled="true"
+            android:exported="false"></provider>
 
+        <activity android:name=".base.host.BaseHostActivity" />
+    </application>
+
+</manifest>
