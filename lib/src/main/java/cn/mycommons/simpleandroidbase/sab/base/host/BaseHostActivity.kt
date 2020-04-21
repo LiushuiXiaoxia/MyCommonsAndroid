@@ -28,9 +28,14 @@ class BaseHostActivity : BaseActivity() {
 
     private var param: BaseHostParam? = null
 
+    override fun onCreateBefore() {
+        super.onCreateBefore()
+
+        param = intent.getSerializableExtra(EXTRA_PARAM) as BaseHostParam?
+    }
+
     override fun onCreateAfter(savedInstanceState: Bundle?) {
         val clazz = intent.getSerializableExtra(EXTRA_FRAGMENT) as Class<out BaseHostFragment<*>>?
-        param = intent.getSerializableExtra(EXTRA_PARAM) as BaseHostParam?
         if (clazz == null) {
             finish()
             return

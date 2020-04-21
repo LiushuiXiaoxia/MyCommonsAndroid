@@ -16,7 +16,7 @@ Just simple code.
 <dependency>
     <groupId>cn.mycommons</groupId>
     <artifactId>simple-android-base</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.4</version>
     <type>pom</type>
 </dependency>
 ```
