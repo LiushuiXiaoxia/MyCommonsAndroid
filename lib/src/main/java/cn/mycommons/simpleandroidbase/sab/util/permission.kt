@@ -1,3 +1,5 @@
+@file:JvmName("PermissionKit")
+
 package cn.mycommons.simpleandroidbase.sab.util
 
 import android.app.Activity

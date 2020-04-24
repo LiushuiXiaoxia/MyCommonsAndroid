@@ -1,3 +1,5 @@
+@file:JvmName("ToastKit")
+
 package cn.mycommons.simpleandroidbase.sab.util
 
 import android.content.Context
