@@ -2,7 +2,10 @@ package cn.mycommons.simpleandroidbase.demo.ui
 
 import android.os.Bundle
 import cn.mycommons.simpleandroidbase.demo.R
-import cn.mycommons.simpleandroidbase.demo.ui.base.*
+import cn.mycommons.simpleandroidbase.demo.ui.base.DemoBaseActivity
+import cn.mycommons.simpleandroidbase.demo.ui.base.DemoHostParam
+import cn.mycommons.simpleandroidbase.demo.ui.base.DemoMvp2Activity
+import cn.mycommons.simpleandroidbase.demo.ui.base.DemoMvpActivity
 import cn.mycommons.simpleandroidbase.demo.util.gotoActivity
 import cn.mycommons.simpleandroidbase.sab.base.BaseActivity
 import cn.mycommons.simpleandroidbase.sab.base.host.pageStart
@@ -21,7 +24,7 @@ class MainActivity : BaseActivity() {
             val param = DemoHostParam().apply {
                 msg = "Hello world"
             }
-            param.pageStart(this, DemoHostFragment::class.java)
+            param.pageStart(this)
         }
 
         btnMvpActivity.setOnClickListener {

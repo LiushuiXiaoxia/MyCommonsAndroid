@@ -1,7 +1,5 @@
 package cn.mycommons.simpleandroidbase.sab.base.host
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import cn.mycommons.simpleandroidbase.sab.R
 import cn.mycommons.simpleandroidbase.sab.base.BaseActivity
@@ -10,20 +8,9 @@ class BaseHostActivity : BaseActivity() {
 
     companion object {
 
-        private const val EXTRA_FRAGMENT = "fragment"
-        const val EXTRA_PARAM = "param"
+        const val EXTRA_FRAGMENT = "fragment"
 
-        fun <T : BaseHostFragment<*>> startFragment(
-            context: Context,
-            clazz: Class<T>,
-            param: BaseHostParam = EmptyParam()
-        ) {
-            Intent(context, BaseHostActivity::class.java).apply {
-                putExtra(EXTRA_FRAGMENT, clazz)
-                putExtra(EXTRA_PARAM, param)
-                context.startActivity(this)
-            }
-        }
+        const val EXTRA_PARAM = "param"
     }
 
     private var param: BaseHostParam? = null

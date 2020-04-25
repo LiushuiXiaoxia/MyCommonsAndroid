@@ -9,6 +9,10 @@ import kotlinx.android.synthetic.main.fragment_demo_host.*
 
 class DemoHostParam : BaseHostParam() {
 
+    init {
+        fragmentClass = DemoHostFragment::class.java
+    }
+
     var msg: String? = null
 }
 
