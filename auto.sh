@@ -12,5 +12,6 @@ git status
 git add .
 git status
 git commit  -m "v$SDK_VERSION" --no-edit;
+git tag "v$SDK_VERSION"
 git log --oneline -10
 git push origin
