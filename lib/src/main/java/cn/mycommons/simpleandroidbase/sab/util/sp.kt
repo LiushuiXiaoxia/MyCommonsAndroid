@@ -5,6 +5,8 @@ package cn.mycommons.simpleandroidbase.sab.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.v4.app.Fragment
+import com.google.gson.GsonBuilder
+import java.lang.reflect.Type
 
 const val SP_NAME = "sp"
 
@@ -22,56 +24,82 @@ interface SpPlus {
     fun putString(key: String, value: String?)
     fun getString(key: String, value: String?): String?
 
+    fun putObject(key: String, value: Any?)
+    fun <T> getObject(key: String, clazz: Type): T?
+
+    fun getAll(): Map<String, *>
+
     fun removeAll()
     fun remove(key: String)
 
     fun contains(key: String): Boolean
 }
 
-class DefaultSp(private val sharedPreferences: SharedPreferences) : SpPlus {
+internal class DefaultSp(private val preferences: SharedPreferences) : SpPlus {
+
+    private val gson = GsonBuilder().disableHtmlEscaping().create()
 
     override fun putInt(key: String, value: Int) {
-        sharedPreferences.edit().putInt(key, value).apply()
+        preferences.edit().putInt(key, value).apply()
     }
 
     override fun getInt(key: String, value: Int): Int {
-        return sharedPreferences.getInt(key, value)
+        return preferences.getInt(key, value)
     }
 
     override fun putLong(key: String, value: Long) {
-        sharedPreferences.edit().putLong(key, value).apply()
+        preferences.edit().putLong(key, value).apply()
     }
 
     override fun getLong(key: String, value: Long): Long {
-        return sharedPreferences.getLong(key, value)
+        return preferences.getLong(key, value)
     }
 
     override fun putFloat(key: String, value: Float) {
-        sharedPreferences.edit().putFloat(key, value).apply()
+        preferences.edit().putFloat(key, value).apply()
     }
 
     override fun getFloat(key: String, value: Float): Float {
-        return sharedPreferences.getFloat(key, value)
+        return preferences.getFloat(key, value)
     }
 
     override fun putString(key: String, value: String?) {
-        sharedPreferences.edit().putString(key, value).apply()
+        preferences.edit().putString(key, value).apply()
     }
 
     override fun getString(key: String, value: String?): String? {
-        return sharedPreferences.getString(key, value)
+        return preferences.getString(key, value)
     }
 
     override fun removeAll() {
-        sharedPreferences.edit().clear().apply()
+        preferences.edit().clear().apply()
     }
 
     override fun remove(key: String) {
-        sharedPreferences.edit().remove(key).apply()
+        preferences.edit().remove(key).apply()
     }
 
     override fun contains(key: String): Boolean {
-        return sharedPreferences.contains(key)
+        return preferences.contains(key)
+    }
+
+    override fun putObject(key: String, value: Any?) {
+        putString(key, gson.toJson(value))
+    }
+
+    override fun <T> getObject(key: String, clazz: Type): T? {
+        try {
+            val json = getString(key, null)
+            if (json != null) {
+                return gson.fromJson(json, clazz)
+            }
+        } catch (e: Exception) {
+        }
+        return null
+    }
+
+    override fun getAll(): Map<String, *> {
+        return preferences.all
     }
 }
 

@@ -32,6 +32,8 @@ dependencies {
     api rootProject.ext.dependencies.appcompatV7
     api rootProject.ext.dependencies.recyclerview
     api "com.android.support:design:${rootProject.ext.android.supportVersion}"
+    api rootProject.ext.dependencies.gson
+
     api 'com.jakewharton.timber:timber:4.7.1'
     api 'org.greenrobot:eventbus:3.2.0'
     api "android.arch.lifecycle:extensions:1.1.1"
