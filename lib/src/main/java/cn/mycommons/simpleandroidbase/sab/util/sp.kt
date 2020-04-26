@@ -27,6 +27,9 @@ interface SpPlus {
     fun putObject(key: String, value: Any?)
     fun <T> getObject(key: String, clazz: Type): T?
 
+    fun putBoolean(key: String, value: Boolean)
+    fun getBoolean(key: String, value: Boolean): Boolean
+
     fun getAll(): Map<String, *>
 
     fun removeAll()
@@ -96,6 +99,14 @@ internal class DefaultSp(private val preferences: SharedPreferences) : SpPlus {
         } catch (e: Exception) {
         }
         return null
+    }
+
+    override fun putBoolean(key: String, value: Boolean) {
+        preferences.edit().putBoolean(key, value).apply()
+    }
+
+    override fun getBoolean(key: String, value: Boolean): Boolean {
+        return preferences.getBoolean(key, value)
     }
 
     override fun getAll(): Map<String, *> {
