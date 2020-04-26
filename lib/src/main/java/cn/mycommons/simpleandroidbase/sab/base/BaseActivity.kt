@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import cn.mycommons.simpleandroidbase.sab.SabKit
 import cn.mycommons.simpleandroidbase.sab.util.showToast
+import cn.mycommons.simpleandroidbase.sab.widget.checkPost
 
 abstract class BaseActivity : AppCompatActivity(), IUiCreator, ILoadView {
 
@@ -77,7 +78,7 @@ abstract class BaseActivity : AppCompatActivity(), IUiCreator, ILoadView {
     open fun createLoadView(): ILoadView = SabKit.factory.loadView(this, this)
 
     override fun showLoadView() {
-        uiHandler.post {
+        uiHandler.checkPost {
             if (!isDestroyActivity()) {
                 loadView.showLoadView()
             }
@@ -85,7 +86,7 @@ abstract class BaseActivity : AppCompatActivity(), IUiCreator, ILoadView {
     }
 
     override fun dismissLoadView() {
-        uiHandler.post {
+        uiHandler.checkPost {
             if (!isDestroyActivity()) {
                 loadView.dismissLoadView()
             }

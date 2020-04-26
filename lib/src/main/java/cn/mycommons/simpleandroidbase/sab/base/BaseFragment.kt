@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import cn.mycommons.simpleandroidbase.sab.SabKit
 import cn.mycommons.simpleandroidbase.sab.util.showToast
+import cn.mycommons.simpleandroidbase.sab.widget.checkPost
 import timber.log.Timber
 
 abstract class BaseFragment : Fragment(), IUiCreator, ILoadView {
@@ -61,10 +62,10 @@ abstract class BaseFragment : Fragment(), IUiCreator, ILoadView {
     }
 
     fun launchOnUiThread(runnable: () -> Unit) {
-        uiHandler.post(runnable)
+        uiHandler.checkPost(runnable)
     }
 
     fun launchOnUiThread(runnable: Runnable) {
-        uiHandler.post(runnable)
+        uiHandler.checkPost(runnable)
     }
 }

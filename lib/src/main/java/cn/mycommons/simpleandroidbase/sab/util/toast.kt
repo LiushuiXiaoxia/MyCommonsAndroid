@@ -8,6 +8,7 @@ import android.os.Looper
 import android.support.v4.app.Fragment
 import android.widget.Toast
 import cn.mycommons.simpleandroidbase.sab.SabKit
+import cn.mycommons.simpleandroidbase.sab.widget.checkPost
 
 
 private val handler by lazy { Handler(Looper.getMainLooper()) }
@@ -19,12 +20,8 @@ fun Context.showToast(msg: Int) {
 }
 
 fun Context.showToast(msg: String) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    handler.checkPost {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-    } else {
-        handler.post {
-            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-        }
     }
 }
 
@@ -33,21 +30,13 @@ fun Fragment.showToast(msg: Int) {
 }
 
 fun Fragment.showToast(msg: String) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    handler.checkPost {
         Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
-    } else {
-        handler.post {
-            Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
-        }
     }
 }
 
 fun showToast(msg: String) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    handler.checkPost {
         Toast.makeText(context(), msg, Toast.LENGTH_LONG).show()
-    } else {
-        handler.post {
-            Toast.makeText(context(), msg, Toast.LENGTH_LONG).show()
-        }
     }
 }
